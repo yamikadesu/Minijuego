@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{3c8a0ec2-bbd2-4298-a1d1-53e4b8c502c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Entities">
+      <UniqueIdentifier>{5f0f4d6c-4633-43df-a070-09be3b1c18da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Common">
+      <UniqueIdentifier>{b91297e9-2ec4-4371-b28d-b9e2035eee83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Managers">
+      <UniqueIdentifier>{9021cffa-4857-46d7-a701-51c47ec6474b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Global">
+      <UniqueIdentifier>{a9966361-7b12-472d-8b2b-8878c9046250}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Graphics">
+      <UniqueIdentifier>{8cc1e8f0-c542-4ed2-9b43-93c068fa2809}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Entities\Components">
+      <UniqueIdentifier>{6e8246d4-065f-4130-9579-dcc1028481a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Entities\Messages">
+      <UniqueIdentifier>{9433f959-d732-4afd-839d-8849e35e2112}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\common\core.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\font.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lodepng.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\stdafx.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\sys_win.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Managers\world.cpp">
+      <Filter>Source Files\Game\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Global\timer.cpp">
+      <Filter>Source Files\Game\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Graphics\sprite.cpp">
+      <Filter>Source Files\Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Managers\graphics_engine.cpp">
+      <Filter>Source Files\Game\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Graphics\background.cpp">
+      <Filter>Source Files\Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\entity.cpp">
+      <Filter>Source Files\Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Components\collision_comp.cpp">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Components\linear_vel_comp.cpp">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Components\render_comp.cpp">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\main.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Enemy.cpp">
+      <Filter>Source Files\Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Player.cpp">
+      <Filter>Source Files\Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Boss.cpp">
+      <Filter>Source Files\Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Components\life_comp.cpp">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Components\level_comp.cpp">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Managers\Level.cpp">
+      <Filter>Source Files\Game\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Managers\GameController.cpp">
+      <Filter>Source Files\Game\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Managers\InputController.cpp">
+      <Filter>Source Files\Game\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Managers\InterfaceController.cpp">
+      <Filter>Source Files\Game\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Bullet.cpp">
+      <Filter>Source Files\Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Upgrade.cpp">
+      <Filter>Source Files\Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Components\bullet_comp.cpp">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\leaks_windows.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\leaks.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Components\component.cpp">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Button.cpp">
+      <Filter>Source Files\Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Components\click_comp.cpp">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Components\dialog_comp.cpp">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Components\sound_comp.cpp">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\Components\menu_comp.cpp">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Game\Entities\CheckBox.cpp">
+      <Filter>Source Files\Game\Entities</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\common\core.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\font.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lodepng.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\stdafx.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sys.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Managers\world.h">
+      <Filter>Source Files\Game\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Global\timer.h">
+      <Filter>Source Files\Game\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Graphics\sprite.h">
+      <Filter>Source Files\Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Managers\graphics_engine.h">
+      <Filter>Source Files\Game\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Graphics\background.h">
+      <Filter>Source Files\Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\entity.h">
+      <Filter>Source Files\Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Components\collision_comp.h">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Components\component.h">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Components\linear_vel_comp.h">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Components\render_comp.h">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Graphics\render_object.h">
+      <Filter>Source Files\Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Messages\message.h">
+      <Filter>Source Files\Game\Entities\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Messages\new_pos_msg.h">
+      <Filter>Source Files\Game\Entities\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Messages\collision_msg.h">
+      <Filter>Source Files\Game\Entities\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Enemy.h">
+      <Filter>Source Files\Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Player.h">
+      <Filter>Source Files\Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Boss.h">
+      <Filter>Source Files\Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Messages\render_msg.h">
+      <Filter>Source Files\Game\Entities\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Messages\reset_msg.h">
+      <Filter>Source Files\Game\Entities\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Messages\damage_msg.h">
+      <Filter>Source Files\Game\Entities\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Components\level_comp.h">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Components\life_comp.h">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Managers\Level.h">
+      <Filter>Source Files\Game\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Managers\GameController.h">
+      <Filter>Source Files\Game\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Managers\InputController.h">
+      <Filter>Source Files\Game\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Managers\InterfaceController.h">
+      <Filter>Source Files\Game\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Bullet.h">
+      <Filter>Source Files\Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Messages\entity_msg.h">
+      <Filter>Source Files\Game\Entities\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Upgrade.h">
+      <Filter>Source Files\Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Components\bullet_comp.h">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\leaks.h">
+      <Filter>Source Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Button.h">
+      <Filter>Source Files\Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Components\click_comp.h">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Messages\input_msg.h">
+      <Filter>Source Files\Game\Entities\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Components\dialog_comp.h">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Components\sound_comp.h">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Components\menu_comp.h">
+      <Filter>Source Files\Game\Entities\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Messages\sound_msg.h">
+      <Filter>Source Files\Game\Entities\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\Messages\menu_msg.h">
+      <Filter>Source Files\Game\Entities\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Entities\CheckBox.h">
+      <Filter>Source Files\Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Game\Managers\events.h">
+      <Filter>Source Files\Game\Managers</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
