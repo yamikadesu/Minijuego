@@ -3,10 +3,11 @@
 
 #include "../../../../common/core.h"
 #include "render_object.h"
+#include <string>
 
 //Información de datos de un sprite (para generar un sprite)
 struct SpriteData {
-	const char * loc;
+	std::string loc;
 	vec2 size;
 	float angle = 0.0f;
 	rgba_t rgba = { 255, 255, 255, 255 };
@@ -22,7 +23,7 @@ private:
 	//Id del sprite (OpenGL)
 	GLuint m_uImgId;
 	//Ubicación del archivo
-	char m_sFileName[128];
+	std::string m_sFileName;
 	//Variable que indica si se renderiza o no (se usa principalmente en el parpadeo de invulnerabilidad del player)
 	bool m_notRender;
 	//Ángulo de rotación del sprite
@@ -32,7 +33,7 @@ private:
 	//UVs para la animación (x = u0 = coordenada x inferior izquierda ; y = v0 = coordenada x inferior derecha; z = u1 = coordenada x superior izquierda; t = v1 = coordenada x superior derecha)
 	vec4 m_uv;
 public:
-	cSprite(const char *sFileName, const vec2 &vSize, const float angle = 0.0f, const rgba_t &rgba = {255, 255, 255, 255});
+	cSprite(std::string sFileName, const vec2 &vSize, const float angle = 0.0f, const rgba_t &rgba = {255, 255, 255, 255});
 	~cSprite();
 	inline void SetPos(const vec2 &vPos) { m_vPos = vPos; };
 	inline const vec2 &GetPos() const { return m_vPos; };
@@ -44,7 +45,7 @@ public:
 	inline const rgba_t &GetRGBA() const { return m_rgba; };
 	inline void SetUV(const vec4 &uv) { m_uv = uv; };
 	inline const vec4 &GetUV() const { return m_uv; };
-	inline const char* GetFileName() const { return m_sFileName; };
+	inline std::string GetFileName() const { return m_sFileName; };
 	inline void SetId(const GLuint &uv) { m_uImgId = uv; };
 	inline const GLuint &GetId() const { return m_uImgId; };
 

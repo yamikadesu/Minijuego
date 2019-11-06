@@ -26,12 +26,12 @@ void cInputController::ProcessInputs()
 {
 	vec2 mousePos = GetMousePos();
 	if (isPress(Key::LCLICK)) {
-		TEvent *pEventL = NEW(TEventMouseDownLeft, (mousePos.x, mousePos.y));
+		TEvent *pEventL = NEW(TEventMouseDownLeft, (static_cast<int>(mousePos.x), static_cast<int>(mousePos.y)));
 		m_events.push_back(pEventL);
 	}
 
 	if (isPress(Key::RCLICK)) {
-		TEvent *pEventR = NEW(TEventMouseDownRight, (mousePos.x, mousePos.y));
+		TEvent *pEventR = NEW(TEventMouseDownRight, (static_cast<int>(mousePos.x), static_cast<int>(mousePos.y)));
 		m_events.push_back(pEventR);
 	}
 
@@ -40,7 +40,7 @@ void cInputController::ProcessInputs()
 		m_events.push_back(pEventS);
 	}
 
-	TEvent *pEvent2 = NEW(TEventMouseMove, (mousePos.x, mousePos.y));
+	TEvent *pEvent2 = NEW(TEventMouseMove, (static_cast<int>(mousePos.x), static_cast<int>(mousePos.y)));
 	m_events.push_back(pEvent2);
 }
 

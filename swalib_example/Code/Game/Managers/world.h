@@ -35,7 +35,7 @@ public:
 
 	void InitMenu();
 	void Init();
-	virtual void Update(float fTimeDiff) override;
+	virtual void Update(float timeDiff) override;
 	void Draw();
 
 	//Entidades actuales del mundo

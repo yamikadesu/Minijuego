@@ -39,10 +39,9 @@ void cSoundComp::ReceiveMessage(cMessage &message)
 {
 	cEntity *pOwnEnt = GetOwner();
 	assert(pOwnEnt != nullptr);
-	World* world = dynamic_cast<World*>(pOwnEnt);
 	const cPlaySoundMsg *pMsg6 = dynamic_cast<const cPlaySoundMsg *>(&message);
 	if (pMsg6 != nullptr) {
-		PlaySound(pMsg6->GetSong(), NULL, SND_LOOP | SND_FILENAME | SND_ASYNC);
+		PlaySound(pMsg6->GetSong().c_str(), NULL, SND_LOOP | SND_FILENAME | SND_ASYNC);
 		return;
 	}
 }

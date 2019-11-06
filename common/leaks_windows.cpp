@@ -16,7 +16,7 @@ void DumpUnfreed()
 	ALLOC_INFO *pCurrItem = g_LeakList;
 	while (pCurrItem)
 	{
-		sprintf(buf, "%s(%d): ADDRESS %d\t%d unfreed\n", pCurrItem->file, pCurrItem->line, pCurrItem->address, pCurrItem->size);
+		sprintf(buf, "%s(%d): ADDRESS %d\t%d unfreed\n", pCurrItem->file, pCurrItem->line, (int)pCurrItem->address, pCurrItem->size);
 		OutputDebugStringA(buf);
 		totalSize += pCurrItem->size;
 		pCurrItem = pCurrItem->pNext;

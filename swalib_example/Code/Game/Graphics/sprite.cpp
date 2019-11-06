@@ -4,11 +4,12 @@
 #include <string.h>
 #include <assert.h>
 
-cSprite::cSprite(const char *sFileName, const vec2 &vSize, const float angle, const rgba_t &rgba) : m_vPos({ 0,0 })
+cSprite::cSprite(std::string sFileName, const vec2 &vSize, const float angle, const rgba_t &rgba) : m_vPos({ 0,0 })
 	, m_vSize(vSize), m_notRender(false), m_angle(angle), m_rgba(rgba), m_uv({ 0.f, 1.f,0.f,1.f })
 {
-	errno_t err = strcpy_s(m_sFileName, _countof(m_sFileName), sFileName);
-	assert(err == 0);
+// 	errno_t err = strcpy_s(m_sFileName, _countof(m_sFileName), sFileName.c_str());
+// 	assert(err == 0);
+	m_sFileName = sFileName;
 	m_uImgId = cGraphicsEngine::GetInstance().InsertImg(sFileName);	// Get id from repository to render.
 }
 

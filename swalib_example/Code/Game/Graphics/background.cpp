@@ -5,7 +5,7 @@
 #include "../Managers/Level.h"
 #include "../Entities/Components/level_comp.h"
 
-cBackground::cBackground(const char *sFileName, const vec2 &fSize, vec2 resize, vec2 resizePos, vec2 resizeSum) : m_Sprite(sFileName, fSize), m_resize(resize), m_resizePos(resizePos), m_resizeSum(resizeSum)
+cBackground::cBackground(std::string sFileName, const vec2 &fSize, vec2 resize, vec2 resizePos, vec2 resizeSum) : m_Sprite(sFileName, fSize), m_resize(resize), m_resizePos(resizePos), m_resizeSum(resizeSum)
 {
 }
 

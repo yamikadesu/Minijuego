@@ -33,6 +33,9 @@
     <Filter Include="Source Files\Game\Entities\Messages">
       <UniqueIdentifier>{9433f959-d732-4afd-839d-8849e35e2112}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Common\LUA">
+      <UniqueIdentifier>{fd51c149-c25c-4365-a3c0-139d2543126b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\core.cpp">
@@ -142,6 +145,111 @@
     </ClCompile>
     <ClCompile Include="..\Code\Game\Entities\CheckBox.cpp">
       <Filter>Source Files\Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lundump.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lutf8lib.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lvm.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lzio.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lapi.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lauxlib.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lbaselib.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lbitlib.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lcode.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lcorolib.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lctype.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\ldblib.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\ldebug.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\ldo.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\ldump.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lfunc.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lgc.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\linit.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\liolib.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\llex.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lmathlib.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lmem.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\loadlib.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lobject.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lopcodes.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\loslib.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lparser.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lstate.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lstring.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lstrlib.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\ltable.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\ltablib.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\ltm.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\lua.c">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\lua535\include\luac.c">
+      <Filter>Source Files\Common\LUA</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -283,5 +391,88 @@
     <ClInclude Include="..\Code\Game\Managers\events.h">
       <Filter>Source Files\Game\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\luaconf.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lualib.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lundump.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lvm.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lzio.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lapi.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lauxlib.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lcode.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lctype.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\ldebug.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\ldo.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lfunc.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lgc.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\llex.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\llimits.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lmem.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lobject.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lopcodes.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lparser.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lprefix.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lstate.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lstring.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\ltable.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\ltm.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lua.h">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\lua535\include\lua.hpp">
+      <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\common\config.lua">
+      <Filter>Source Files\Common</Filter>
+    </None>
   </ItemGroup>
 </Project>

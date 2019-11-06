@@ -1,11 +1,19 @@
 #ifndef _STDAFX_H_
 #define _STDAFX_H_
 
+//#include "lua535/include/lua.hpp"
+// extern "C"
+// {
+// #include "lua535/include/lua.h"
+// #include "lua535/include/lauxlib.h"
+// #include "lua535/include/lualib.h"
+// }
+
 //=============================================================================
 #ifdef _WIN32
-
-//#pragma pack(1)
 #pragma warning(disable:4996) // Using open/close/read... for file access
+//#pragma comment(lib, "lua53.lib")
+//#pragma pack(1)
 
 // Including SDKDDKVer.h defines the highest available Windows platform.
 // If you wish to build your application for a previous Windows platform, include WinSDKVer.h and

@@ -6,6 +6,8 @@
 #include "../Graphics/background.h"
 #include "../../../../common/core.h"
 
+using namespace std;
+
 class cRenderObject;
 
 class cGraphicsEngine
@@ -37,15 +39,15 @@ public:
 	void Terminate();
 
 	//Inserta una imagen en el repositorio de imagenes
-	GLuint InsertImg(const char *sFileName);
+	GLuint InsertImg(string sFileName);
 	//Elimina una imagen
-	void DeleteImg(const char *sFileName);
+	void DeleteImg(string sFileName);
 	//Lo mismo pero para objetos renderizables
 	void InsertRenderObj(cRenderObject &renderObj);
 	void DeleteRenderObj(cRenderObject &renderObj);
 	void DeleteAllRenderObj();
 	//Obtiene la información de la imagen, devuelve 0 en caso de error
-	cGraphicsEngine::tImgInfo *GetImgInfo(const char *sFileName);
+	cGraphicsEngine::tImgInfo *GetImgInfo(string sFileName);
 
 private:
 	cGraphicsEngine() {};

@@ -68,7 +68,7 @@ void World::ManageEvent(TEvent* pEvent, float fTimeDiff)
 	if (m_state == World::State::MENU) {
 		if (pEvent->GetType() == TEvent::TType::EMouseDownLeft) {
 			TEventMouseDownLeft* event = dynamic_cast<TEventMouseDownLeft*>(pEvent);
-			vec2 mousePos = {event->Getx(), event->Gety()};
+			vec2 mousePos = { static_cast<float>(event->Getx()), static_cast<float>(event->Gety())};
 			cClickMsg clickMsg(mousePos);
 			ReceiveMessage(clickMsg);
 		}
@@ -89,7 +89,7 @@ void World::ManageEvent(TEvent* pEvent, float fTimeDiff)
 		if (Player::GetPlayer() != nullptr && Player::GetPlayer()->FindComponent<cLifeComp>()->GetLifes() > 0) {
 			TEventMouseMove* eventMove = dynamic_cast<TEventMouseMove*>(pEvent);
 			if (eventMove) {
-				vec2 mousePos = { eventMove->Getx(), eventMove->Gety() };
+				vec2 mousePos = { static_cast<float>(eventMove->Getx()), static_cast<float>(eventMove->Gety()) };
 				cMovePlayerMsg newPosPly(mousePos);
 				ReceiveMessage(newPosPly);
 			}
@@ -100,14 +100,14 @@ void World::ManageEvent(TEvent* pEvent, float fTimeDiff)
 		}
 	}
 		//Gestión del input en derrota y victoria
-	else if (World::State::GAMEOVER) {
+	else if (m_state == World::State::GAMEOVER) {
 		if (pEvent->GetType() == TEvent::TType::EMouseDownRight) {
 			cResetWorldMsg resetMsg;
 			ReceiveMessage(resetMsg);
 		}
 	}
 
-	else if (World::State::VICTORY) {
+	else if (m_state == World::State::VICTORY) {
 		if (pEvent->GetType() == TEvent::TType::EMouseDownRight) {
 			cResetWorldMsg resetMsg;
 			ReceiveMessage(resetMsg);
@@ -152,11 +152,11 @@ void World::Init() {
 }
 
 //Actualización del mundo
-void World::Update(float fTimeDiff) {
+void World::Update(float timeDiff) {
 	switch (GetState()) {
 	case State::PLAYING:
 		//
-		cDialogLogicMsg dialogLogPly(fTimeDiff);
+		cDialogLogicMsg dialogLogPly(timeDiff);
 		ReceiveMessage(dialogLogPly);
 
 		if (Player::GetPlayer() == nullptr || Player::GetPlayer()->FindComponent<cLifeComp>()->GetLifes() <= 0) {
@@ -170,7 +170,7 @@ void World::Update(float fTimeDiff) {
 		}
 		//En caso contrario actualiza el jugador y el nivel
 		else {
-			Player::GetPlayer()->Slot(fTimeDiff);
+			Player::GetPlayer()->Slot(timeDiff);
 		}
 		break;
 	}

@@ -10,7 +10,7 @@
 #include "../../Managers/world.h"
 
 //Se indica el lugar, el tamaño y si es introducido en el vector de sprites que se renderizan automaticamente o lo renderizamos manualmente
-cRenderComp::cRenderComp(const char *sFileName, const vec2 &vSize, bool intr, int framesNum, float frameTime)
+cRenderComp::cRenderComp(std::string sFileName, const vec2 &vSize, bool intr, int framesNum, float frameTime)
 {
 	SetFrameTime(frameTime);
 	m_time = 0.f;

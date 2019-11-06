@@ -99,7 +99,7 @@ void cGraphicsEngine::Terminate()
 	FONT_End();
 }
 
-GLuint cGraphicsEngine::InsertImg(const char *sFileName)
+GLuint cGraphicsEngine::InsertImg(string sFileName)
 {
 	// Control if prev. inserted.
 	tImgInfo *pImgInfo = GetImgInfo(sFileName);
@@ -108,7 +108,7 @@ GLuint cGraphicsEngine::InsertImg(const char *sFileName)
 		return pImgInfo->ImgId;
 	}
 
-	GLuint imgId = CORE_LoadPNG(sFileName, false);
+	GLuint imgId = CORE_LoadPNG(sFileName.c_str(), false);
 	assert(imgId != 0);
 	tImgInfo newImgInfo;
 	newImgInfo.ImgId = imgId;
@@ -117,7 +117,7 @@ GLuint cGraphicsEngine::InsertImg(const char *sFileName)
 	return newImgInfo.ImgId;
 }
 
-void cGraphicsEngine::DeleteImg(const char *sFileName)
+void cGraphicsEngine::DeleteImg(string sFileName)
 {
 	tImgInfo *pImgInfo = GetImgInfo(sFileName);
 	if (pImgInfo == nullptr) {
@@ -131,7 +131,7 @@ void cGraphicsEngine::DeleteImg(const char *sFileName)
 	}
 }
 
-cGraphicsEngine::tImgInfo *cGraphicsEngine::GetImgInfo(const char *sFileName)
+cGraphicsEngine::tImgInfo *cGraphicsEngine::GetImgInfo(string sFileName)
 {
 	// Control if prev. inserted.
 	auto result = m_Images.find(sFileName);

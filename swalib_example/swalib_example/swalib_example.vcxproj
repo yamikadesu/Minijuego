@@ -68,7 +68,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
@@ -130,6 +133,41 @@
     <ClCompile Include="..\..\common\leaks.cpp" />
     <ClCompile Include="..\..\common\leaks_windows.cpp" />
     <ClCompile Include="..\..\common\lodepng.cpp" />
+    <ClCompile Include="..\..\common\lua535\include\lapi.c" />
+    <ClCompile Include="..\..\common\lua535\include\lauxlib.c" />
+    <ClCompile Include="..\..\common\lua535\include\lbaselib.c" />
+    <ClCompile Include="..\..\common\lua535\include\lbitlib.c" />
+    <ClCompile Include="..\..\common\lua535\include\lcode.c" />
+    <ClCompile Include="..\..\common\lua535\include\lcorolib.c" />
+    <ClCompile Include="..\..\common\lua535\include\lctype.c" />
+    <ClCompile Include="..\..\common\lua535\include\ldblib.c" />
+    <ClCompile Include="..\..\common\lua535\include\ldebug.c" />
+    <ClCompile Include="..\..\common\lua535\include\ldo.c" />
+    <ClCompile Include="..\..\common\lua535\include\ldump.c" />
+    <ClCompile Include="..\..\common\lua535\include\lfunc.c" />
+    <ClCompile Include="..\..\common\lua535\include\lgc.c" />
+    <ClCompile Include="..\..\common\lua535\include\linit.c" />
+    <ClCompile Include="..\..\common\lua535\include\liolib.c" />
+    <ClCompile Include="..\..\common\lua535\include\llex.c" />
+    <ClCompile Include="..\..\common\lua535\include\lmathlib.c" />
+    <ClCompile Include="..\..\common\lua535\include\lmem.c" />
+    <ClCompile Include="..\..\common\lua535\include\loadlib.c" />
+    <ClCompile Include="..\..\common\lua535\include\lobject.c" />
+    <ClCompile Include="..\..\common\lua535\include\lopcodes.c" />
+    <ClCompile Include="..\..\common\lua535\include\loslib.c" />
+    <ClCompile Include="..\..\common\lua535\include\lparser.c" />
+    <ClCompile Include="..\..\common\lua535\include\lstate.c" />
+    <ClCompile Include="..\..\common\lua535\include\lstring.c" />
+    <ClCompile Include="..\..\common\lua535\include\lstrlib.c" />
+    <ClCompile Include="..\..\common\lua535\include\ltable.c" />
+    <ClCompile Include="..\..\common\lua535\include\ltablib.c" />
+    <ClCompile Include="..\..\common\lua535\include\ltm.c" />
+    <ClCompile Include="..\..\common\lua535\include\lua.c" />
+    <ClCompile Include="..\..\common\lua535\include\luac.c" />
+    <ClCompile Include="..\..\common\lua535\include\lundump.c" />
+    <ClCompile Include="..\..\common\lua535\include\lutf8lib.c" />
+    <ClCompile Include="..\..\common\lua535\include\lvm.c" />
+    <ClCompile Include="..\..\common\lua535\include\lzio.c" />
     <ClCompile Include="..\..\common\stdafx.cpp" />
     <ClCompile Include="..\..\common\sys_win.cpp" />
     <ClCompile Include="..\Code\Game\Entities\Boss.cpp" />
@@ -167,6 +205,32 @@
     <ClInclude Include="..\..\common\font.h" />
     <ClInclude Include="..\..\common\leaks.h" />
     <ClInclude Include="..\..\common\lodepng.h" />
+    <ClInclude Include="..\..\common\lua535\include\lapi.h" />
+    <ClInclude Include="..\..\common\lua535\include\lauxlib.h" />
+    <ClInclude Include="..\..\common\lua535\include\lcode.h" />
+    <ClInclude Include="..\..\common\lua535\include\lctype.h" />
+    <ClInclude Include="..\..\common\lua535\include\ldebug.h" />
+    <ClInclude Include="..\..\common\lua535\include\ldo.h" />
+    <ClInclude Include="..\..\common\lua535\include\lfunc.h" />
+    <ClInclude Include="..\..\common\lua535\include\lgc.h" />
+    <ClInclude Include="..\..\common\lua535\include\llex.h" />
+    <ClInclude Include="..\..\common\lua535\include\llimits.h" />
+    <ClInclude Include="..\..\common\lua535\include\lmem.h" />
+    <ClInclude Include="..\..\common\lua535\include\lobject.h" />
+    <ClInclude Include="..\..\common\lua535\include\lopcodes.h" />
+    <ClInclude Include="..\..\common\lua535\include\lparser.h" />
+    <ClInclude Include="..\..\common\lua535\include\lprefix.h" />
+    <ClInclude Include="..\..\common\lua535\include\lstate.h" />
+    <ClInclude Include="..\..\common\lua535\include\lstring.h" />
+    <ClInclude Include="..\..\common\lua535\include\ltable.h" />
+    <ClInclude Include="..\..\common\lua535\include\ltm.h" />
+    <ClInclude Include="..\..\common\lua535\include\lua.h" />
+    <ClInclude Include="..\..\common\lua535\include\lua.hpp" />
+    <ClInclude Include="..\..\common\lua535\include\luaconf.h" />
+    <ClInclude Include="..\..\common\lua535\include\lualib.h" />
+    <ClInclude Include="..\..\common\lua535\include\lundump.h" />
+    <ClInclude Include="..\..\common\lua535\include\lvm.h" />
+    <ClInclude Include="..\..\common\lua535\include\lzio.h" />
     <ClInclude Include="..\..\common\stdafx.h" />
     <ClInclude Include="..\..\common\sys.h" />
     <ClInclude Include="..\Code\Game\Entities\Boss.h" />
@@ -209,6 +273,9 @@
     <ClInclude Include="..\Code\Game\Managers\InterfaceController.h" />
     <ClInclude Include="..\Code\Game\Managers\Level.h" />
     <ClInclude Include="..\Code\Game\Managers\world.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\common\config.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

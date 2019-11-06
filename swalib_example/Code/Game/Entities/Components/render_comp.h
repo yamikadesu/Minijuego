@@ -20,7 +20,7 @@ private:
 	//Variable que va acumulando el tiempo
 	float m_time;
 public:
-	cRenderComp(const char *sFileName, const vec2 &vSize, bool intr, int framesNum = 1, float frameTime = 0.f);
+	cRenderComp(std::string sFileName, const vec2 &vSize, bool intr, int framesNum = 1, float frameTime = 0.f);
 	~cRenderComp();
 
 	inline cSprite* GetSprite() { return m_Sprite; };
