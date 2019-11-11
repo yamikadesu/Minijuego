@@ -796,6 +796,29 @@ void GameController::Draw() {
 	m_world->Draw();
 }
 
+void toUpperCase(char *t)
+{
+	for (int i = 0; i < strlen(t); i++)
+	{
+		if (t[i] >= 'A' && t[i] <= 'Z') {
+			t[i] += 32;
+		}
+	}
+}
+
+string getLuaFilePath(string text) {
+	char basePath[255] = "";
+	string thisFile = _fullpath(basePath, "", sizeof(basePath));
+	int pos = thisFile.find("\\");
+	while (pos != std::string::npos) {
+		thisFile.replace(pos, 1, "/");
+		pos = thisFile.find("\\");
+	}
+	thisFile.replace(thisFile.find("swalib_example/Release"), thisFile.size(), "");
+	thisFile.append(text);
+	return thisFile;
+}
+
 //Inicializa el juego con los valores indicados en sys
 GameController* GameController::Init() {
 	DEL(m_game);
@@ -805,7 +828,8 @@ GameController* GameController::Init() {
 	luaState = luaL_newstate();
 	luaL_openlibs(luaState);
 
-	if (lua_checkLua(luaState, luaL_dofile(luaState, "D:/Proyectos/ProyectoInterfazv3/ProyectoComportamientosv3/common/config.lua"))) {
+	//if (lua_checkLua(luaState, luaL_dofile(luaState, "D:/Proyectos/ProyectoInterfazv3/ProyectoComportamientosv3/common/config.lua"))) {
+	if (lua_checkLua(luaState, luaL_dofile(luaState, getLuaFilePath("common/config.lua").c_str()))) {
 		return lua_getGame();
 	}
 	return nullptr;
