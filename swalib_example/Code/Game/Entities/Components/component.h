@@ -16,7 +16,7 @@ public:
 	virtual void Slot(float fTimeDiff) = 0;
 	inline void SetOwner(cEntity &ent) { m_pOwner = &ent; }
 	inline cEntity *GetOwner() const { return m_pOwner; }
-	virtual void ReceiveMessage(cMessage &message)
+	virtual void ReceiveMessage(cMessage&)
 	{};
 	virtual void Activate()
 	{}

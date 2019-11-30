@@ -12,7 +12,7 @@ class cRenderObject;
 
 class cGraphicsEngine
 {
-private:
+public:
 	struct tImgInfo {
 		//Id de la Imagen
 		GLuint	ImgId;
@@ -21,12 +21,6 @@ private:
 		tImgInfo() : ImgId(0), iRefCount(0)
 		{}
 	};
-	//Conjunto de imágenes
-	std::map<std::string, tImgInfo> m_Images;
-	//Conjunto de objetos renderizables
-	std::vector<cRenderObject *>	m_RenderObjs;
-
-public:
 	static cGraphicsEngine& GetInstance();	// Singleton.
 	cGraphicsEngine(cGraphicsEngine const&) = delete;
 	void operator = (cGraphicsEngine const&) = delete;
@@ -45,14 +39,20 @@ public:
 	//Lo mismo pero para objetos renderizables
 	void InsertRenderObj(cRenderObject &renderObj);
 	void DeleteRenderObj(cRenderObject &renderObj);
+	void DeleteRenderObj(string sprite);
 	void DeleteAllRenderObj();
 	//Obtiene la información de la imagen, devuelve 0 en caso de error
 	cGraphicsEngine::tImgInfo *GetImgInfo(string sFileName);
+private:
+	//Conjunto de imágenes
+	std::map<std::string, tImgInfo> m_Images;
+	//Conjunto de objetos renderizables
+	std::vector<cRenderObject *>	m_RenderObjs;
 
 private:
 	cGraphicsEngine() {};
 
-	void RenderObjs() const;
+	void RenderObjs();
 };
 
 #endif // !_GRAPHICS_ENGINE_H_

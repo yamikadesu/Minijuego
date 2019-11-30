@@ -1,5 +1,6 @@
 #include "../../../../common/stdafx.h"
 #include "Level.h"
+#include "../Entities/Messages/reset_msg.h"
 
 vector<Level*> Level::m_levels;
 
@@ -10,6 +11,11 @@ Level* Level::create(){
 }
 
 Level::~Level() {
+	cDeleteEntitiesMsg msg;
+	ReceiveMessage(msg);
+// 	if (cLevelComp* levelComp = FindComponent<cLevelComp>()) {
+// 		levelComp
+// 	}
 }
 
 //Se usa para eliminar todos los niveles

@@ -15,3 +15,8 @@ Player* Player::create() {
 Player* Player::GetPlayer() {
 	return m_player;
 }
+
+void Player::DeletePlayer()
+{
+	DEL(m_player);
+}

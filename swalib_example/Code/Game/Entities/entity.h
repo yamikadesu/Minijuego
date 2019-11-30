@@ -17,8 +17,8 @@ public:
 	void Activate();
 	void Deactivate();
 	void Slot(float fTimeDiff);
-	virtual void Update(float timeDiff) {};
-	void ReceiveMessage(cMessage &message) const;
+	virtual void Update(float) {};
+	void ReceiveMessage(cMessage &) const;
 
 	inline void SetDead() { m_isAlive = false; };
 	inline bool GetIsAlive() { return m_isAlive; };

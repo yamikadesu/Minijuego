@@ -8,6 +8,7 @@
 #include "../entity.h"
 #include "../Player.h"
 #include "../../Managers/world.h"
+#include "../Messages/render_msg.h"
 
 //Se indica el lugar, el tamaño y si es introducido en el vector de sprites que se renderizan automaticamente o lo renderizamos manualmente
 cRenderComp::cRenderComp(std::string sFileName, const vec2 &vSize, bool intr, int framesNum, float frameTime)
@@ -34,6 +35,16 @@ void cRenderComp::SetSprite(cSprite* sprite)
 	m_Sprite = sprite;
 	if (sprite) {
 		cGraphicsEngine::GetInstance().GetImgInfo(sprite->GetFileName())->ImgId;
+	}
+}
+
+void cRenderComp::SetSprite(const std::string sFileName, const vec2 &vSize)
+{
+	cGraphicsEngine::tImgInfo* info = cGraphicsEngine::GetInstance().GetImgInfo(sFileName);
+	DEL(m_Sprite);
+	m_Sprite = NEW(cSprite, (sFileName, vSize));
+	if (!info){
+		cGraphicsEngine::GetInstance().InsertRenderObj(*m_Sprite);
 	}
 }
 
@@ -145,6 +156,12 @@ void cRenderComp::ReceiveMessage(cMessage &message)
 	const cRotate * rotMsg = dynamic_cast<const cRotate *>(&message);
 	if (rotMsg != nullptr) {
 		m_Sprite->SetAngle(rotMsg->GetRotation());
+		return;
+	}
+
+	const cChangeSprite * changeSpriteMsg = dynamic_cast<const cChangeSprite *>(&message);
+	if (changeSpriteMsg != nullptr) {
+		SetSprite(changeSpriteMsg->GetSpriteLocation(), changeSpriteMsg->GetSize());
 		return;
 	}
 }

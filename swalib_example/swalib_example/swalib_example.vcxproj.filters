@@ -251,6 +251,9 @@
     <ClCompile Include="..\..\common\lua535\include\luac.c">
       <Filter>Source Files\Common\LUA</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\BehaviourTree.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\core.h">
@@ -468,6 +471,9 @@
     </ClInclude>
     <ClInclude Include="..\..\common\lua535\include\lua.hpp">
       <Filter>Source Files\Common\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\BehaviourTree.h">
+      <Filter>Source Files\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

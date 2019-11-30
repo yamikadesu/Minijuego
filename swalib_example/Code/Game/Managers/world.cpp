@@ -53,15 +53,17 @@ World::World(cBackground* victory, cBackground* defeat, cBackground* menu, vec2 
 }
 
 World::~World() {
-	DEL(GetVictory());
-	DEL(GetDefeat());
-	DEL(GetMenu());
+	DEL(m_victory);
+	DEL(m_defeat);
+	DEL(m_menu);
 	Level::DeleteLevels();
 }
 
 World::State World::GetState() {
 	return m_state;
 }
+
+bool World::setBehaviour = false;
 
 void World::ManageEvent(TEvent* pEvent, float fTimeDiff)
 {
@@ -124,6 +126,7 @@ void World::InitMenu()
 
 //Inicializa el mundo (ya sea al principio o si termina el juego (victoria/derrota))
 void World::Init() {
+	setBehaviour = false;
 	SetActualLevel(0);
 	//Ejecuta una música
 	cPlaySoundMsg playSoundMsg(Level::GetLevels().at(GetActualLevel())->FindComponent<cLevelComp>()->GetBackgrounds()[0]->GetAudio());

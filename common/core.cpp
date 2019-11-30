@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "core.h"
+#include <wtypes.h>
 
 //#############################################################################
 // General
@@ -80,6 +81,10 @@ void CORE_RenderCenteredRotatedSprite(vec2 pos, vec2 size, float angle, GLuint t
   glColor4f(1.f, 1.f, 1.f, 1.f);
 #endif
 }
+
+// template<typename T>
+// bool isValidAddress(T* dir)
+
 
 //#############################################################################
 // BMP files

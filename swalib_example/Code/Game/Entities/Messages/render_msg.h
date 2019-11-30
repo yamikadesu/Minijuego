@@ -4,6 +4,9 @@
 
 #include "message.h"
 #include "../../../../../common/core.h"
+#include <string>
+
+using namespace std;
 
 class cDrawBossMsg : public cMessage
 {};
@@ -62,7 +65,10 @@ private:
 	//Nuevo color
 	rgba_t m_rgba;
 public:
-	cChangeRGBA(rgba_t rgba) : m_rgba(rgba) {};
+	cChangeRGBA(rgba_t rgba)
+	{
+		m_rgba = rgba;
+	};
 	inline const rgba_t &GetRGBA() const { return m_rgba; }
 };
 
@@ -74,6 +80,23 @@ private:
 public:
 	cRotate(float rotation) : m_rotation(rotation) {};
 	inline const float &GetRotation() const { return m_rotation; }
+};
+
+class cChangeSprite : public cMessage
+{
+private:
+	//Nuevo sprite
+	string m_sprite;
+	//Nuevo tamaño
+	vec2 m_size;
+public:
+	cChangeSprite(string sprite, vec2 size)
+	{
+		m_sprite = sprite;
+		m_size = size;
+	};
+	inline string GetSpriteLocation() const{ return m_sprite; }
+	inline vec2 GetSize() const{ return m_size; }
 };
 
 class cAnimMsg : public cMessage

@@ -57,6 +57,8 @@ public:
 	void SetDefeat(cBackground* val) { m_defeat = val; }
 	cBackground* GetMenu() const { return m_menu; }
 	void SetMenu(cBackground* val) { m_menu = val; }
+	//Do once del behaviour del boss
+	static bool setBehaviour;
 private:
 	World(cBackground* victory, cBackground* defeat, cBackground* menu, vec2 worldSize);
 	//Tamaño del mundo

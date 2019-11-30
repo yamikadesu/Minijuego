@@ -8,6 +8,7 @@ class Player : public cEntity {
 public:
 	static Player* create();
 	static Player* GetPlayer();
+	static void DeletePlayer();
 private:
 	Player() {};
 	static Player* m_player;

@@ -9,6 +9,7 @@
 class Boss : public cEntity {
 public:
 	static Boss* create();
+	void finishLogic();
 private:
 	Boss() {};
 };

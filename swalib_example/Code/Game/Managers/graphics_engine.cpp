@@ -9,6 +9,8 @@
 #include "Level.h"
 #include "../Entities/Player.h"
 #include "InterfaceController.h"
+#include "../../../../common/leaks.h"
+#include <functional>
 
 cGraphicsEngine& cGraphicsEngine::GetInstance()
 {
@@ -162,6 +164,17 @@ void cGraphicsEngine::DeleteRenderObj(cRenderObject &renderObj)
 	}
 }
 
+void cGraphicsEngine::DeleteRenderObj(string sprite)
+{
+	for (auto it = m_RenderObjs.begin(); it != m_RenderObjs.end(); ++it) {
+		cSprite* spr = dynamic_cast<cSprite*>(*it);
+		if (spr && spr->GetFileName() == sprite) {
+			m_RenderObjs.erase(it);
+			break;
+		}
+	}
+}
+
 void cGraphicsEngine::DeleteAllRenderObj()
 {
 	int size = m_RenderObjs.size();
@@ -171,10 +184,18 @@ void cGraphicsEngine::DeleteAllRenderObj()
 	m_RenderObjs.clear();
 }
 
-void cGraphicsEngine::RenderObjs() const
+void cGraphicsEngine::RenderObjs()
 {
-	for (cRenderObject *pRenderObj : m_RenderObjs) {
-		assert(pRenderObj != nullptr);
-		pRenderObj->Render();
+	std::function<void(cRenderObject*)> delFunc = [](cRenderObject *rendObj) {DEL(rendObj); };
+	for (unsigned int i = 0; i < m_RenderObjs.size(); i++) {
+		cRenderObject *pRenderObj = m_RenderObjs[i];
+		//assert(pRenderObj != nullptr);
+		if (isValidAddress(pRenderObj, delFunc)) {
+			pRenderObj->Render();
+		}
+		else {
+			m_RenderObjs.erase(m_RenderObjs.begin() + i);
+			i--;
+		}
 	}
 }

@@ -120,7 +120,7 @@ void cLevelComp::Update(float fTimeDiff, Boss* boss) {
 
 		m_enemyAmount--;
 		if (m_enemyAmount <= 0) {
-			deleteEntities();
+ 			deleteEntities();
 		}
 	}
 	//En caso de que haya un boss hace toda su lógica y spawnea sus enemigos (proyectiles)
@@ -134,6 +134,8 @@ void cLevelComp::Update(float fTimeDiff, Boss* boss) {
 		boss->ReceiveMessage(rgbaMsg);
 		if (boss->FindComponent<cBossLogicComp>()->GetLifes() <= 0) {
 			deleteEntities();
+			boss->finishLogic();
+			World::setBehaviour = false;
 		}
 	}
 }
@@ -158,6 +160,12 @@ void cLevelComp::Slot(float fTimeDiff)
 			Update(fTimeDiff);
 		}
 		else if (!m_boss.empty()) {
+			if (!World::setBehaviour) {
+				for (unsigned int i = 0; i < m_boss.size(); i++) {
+					m_boss[i]->FindComponent<cBossLogicComp>()->SetBehaviourTree();
+				}
+				World::setBehaviour = true;
+			}
 			for (unsigned int i = 0; i < m_boss.size(); i++) {
 				if (m_boss[i]->FindComponent<cBossLogicComp>()->GetContinue(fTimeDiff)) {
 					Update(fTimeDiff, m_boss[i]);
@@ -186,6 +194,10 @@ void cLevelComp::ReceiveMessage(cMessage &message)
 	const cDeleteEntitiesMsg* pMsg = dynamic_cast<const cDeleteEntitiesMsg *>(&message);
 	if (pMsg != nullptr) {
 		deleteEntities();
+		for (unsigned int i = 0; i < m_boss.size(); i++) {
+			m_boss[i]->finishLogic();
+		}
+		World::setBehaviour = false;
 		return;
 	}
 	const cDrawBossMsg* pMsg5 = dynamic_cast<const cDrawBossMsg *>(&message);

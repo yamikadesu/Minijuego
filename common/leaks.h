@@ -20,7 +20,7 @@
 	void  DumpUnfreed();
 
 	#define NEW(clase, params)			reinterpret_cast<clase *>(AddTrack(new clase params, sizeof(clase), __FILE__, __LINE__))
-	#define DEL(p)								{ RemoveTrack(p); delete p; }
+	#define DEL(p)								{ RemoveTrack(p); delete p; p = NULL; }
 	#define NEW_ARRAY(clase, num)	  reinterpret_cast<clase *>(AddTrack(new clase[num], sizeof(clase) * num, __FILE__, __LINE__))
 	#define DEL_ARRAY(p)					{ RemoveTrack(p); delete []p; }
 

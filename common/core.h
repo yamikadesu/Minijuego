@@ -3,7 +3,8 @@
 #include <windows.h>
 #include <gl/GL.h>
 #include <cmath>
-
+#include <wtypes.h>
+#include <functional>
 //-----------------------------------------------------------------------------
 typedef unsigned       char byte;
 typedef unsigned short int  word;
@@ -71,6 +72,28 @@ void   CORE_UnloadPNG (GLuint texid);
 void   CORE_RenderSprite(vec2 p0, vec2 p1, GLuint texid);
 void   CORE_RenderCenteredSprite(vec2 pos, vec2 size, GLuint texid);
 void   CORE_RenderCenteredRotatedSprite(vec2 pos, vec2 size, float angle, GLuint texid, rgba_t color = RGBA(255,255,255,255), float u0 = 0.f, float v0 = 1.f, float u1 = 0.f, float v1 = 1.f);
+
+template<typename T>
+T clampf(T val, T min, T max) {
+	return (val < min) ? min : (val > max) ? max : val;
+}
+
+template<typename T>
+bool isValidAddress(T* dir, std::function<void(T*)> callback) {
+	auto checkAddress = [](DWORD val) {
+		return val != 0x00000000 && val != 0xfeeefeee && val != 0xdddddddd && val != 0xcdcdcdcd
+			&& val != 0xbdbdbdbd && val != 0xabababab && val != 0xdeadbeef && val != 0xbaadf00d
+			&& val != 0xcccccccc && val != 0xfdfdfdfd;
+	};
+	DWORD main = reinterpret_cast<DWORD>(dir);
+	DWORD vptr = reinterpret_cast<DWORD>(*(T**)dir);
+	bool resV = checkAddress(vptr);
+	bool resP = checkAddress(main);
+	if (!resP) {
+		callback(dir);
+	}
+	return resV && resP;
+}
 
 #ifdef SWALIB_SOUND
 bool CORE_InitSound();

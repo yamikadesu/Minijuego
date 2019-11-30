@@ -5,6 +5,7 @@
 #include "../../../../../common/core.h"
 #include "component.h"
 #include <vector>
+#include "../../../../../common/BehaviourTree.h"
 
 using namespace std;
 
@@ -57,13 +58,21 @@ public:
 		float error = 0.0f;
 	};
 	cBossLogicComp(vector<vec3> poss, float roundWait, float initWait, bool random, int lifes, bossEnem enemyData);
-
+	~cBossLogicComp() { DEL(m_behaviourTree); };
 	bool GetContinue(float fTimeDiff);
 	inline void SetContinue(bool cont) { m_continue = cont; }
 	inline const float &GetTime() const { return m_time; }
 	inline void SetTime(float time) { m_time = time; }
 	inline const bossEnem &GetData() const { return m_enemyData; }
 	inline void SetData(bossEnem data) { m_enemyData = data; }
+
+	inline vector<vector<vector<string>>> GetBehaviourTree() { return m_behaviourTreeData; }
+	static vector<vector<vector<string>>> default_string;
+	void SetBehaviourTree(vector<vector<vector<string>>> data = default_string);
+
+	void ReconstructBehaviour();
+
+	void finishLogic();
 
 	virtual void Slot(float fTimeDiff) override;
 
@@ -85,6 +94,10 @@ private:
 	bool m_continue;
 	//Datos de los enemigos (proyectiles del boss)
 	bossEnem m_enemyData;
+	//Behaviour Tree Data
+	vector<vector<vector<string>>> m_behaviourTreeData;
+	//Behaviour Tree
+	BehaviourTree* m_behaviourTree;
 };
 
 #endif

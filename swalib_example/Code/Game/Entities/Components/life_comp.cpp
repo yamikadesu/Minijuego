@@ -71,28 +71,117 @@ cBossLogicComp::cBossLogicComp(std::vector<vec3> poss, float roundWait, float in
 {
 	m_lifes = lifes;
 	m_initLifes = lifes;
+	//ReconstructBehaviour();
+}
+
+std::vector<std::vector<std::vector<std::string>>> cBossLogicComp::default_string;
+
+void cBossLogicComp::SetBehaviourTree(vector<vector<vector<string>>> data)
+{
+	if (!data.empty()) {
+		m_behaviourTreeData = data;
+	}
+	else {
+		ReconstructBehaviour();
+	}
+}
+
+void cBossLogicComp::ReconstructBehaviour()
+{
+	const Boss* boss = dynamic_cast<const Boss*>(GetOwner());
+	if (boss && !m_behaviourTreeData.empty()) {
+		//Como no se usará la lógica de posiciones se estable la primera por defecto
+		if (!m_poss.empty()) {
+			vec2 pos = { m_poss[0].x, m_poss[0].y };
+			cNewPosMsg newpos(pos);
+			boss->ReceiveMessage(newpos);
+		}
+
+		m_behaviourTree = NEW(BehaviourTree, ());
+		Bucle* bucle = NEW(Bucle, ());
+		for (unsigned int i = 0; i < m_behaviourTreeData.size(); i++) {
+			BucleSequence* state = NEW(BucleSequence, ());
+			for (unsigned int j = 0; j < m_behaviourTreeData[i].size(); j++) {
+				if (m_behaviourTreeData[i][j].size() > 0) {
+					string val = m_behaviourTreeData[i][j][0];
+					if (val == "4") {
+						Idle* behaviour = NEW(Idle, ());
+						state->m_Children.push_back(behaviour);
+					}
+					else if (val == "5") {
+						ChangeSprite* behaviour = NEW(ChangeSprite, ());
+						state->m_Children.push_back(behaviour);
+					}
+					else if (val == "6") {
+						if (m_behaviourTreeData[i][j].size() > 1) {
+							float par = (float)std::atof(m_behaviourTreeData[i][j][1].c_str());
+							WaitBehaviour* behaviour = NEW(WaitBehaviour, (par));
+							state->m_Children.push_back(behaviour);
+						}
+						else {
+							WaitBehaviour* behaviour = NEW(WaitBehaviour, ());
+							state->m_Children.push_back(behaviour);
+						}
+					}
+					else if (val == "7") {
+						if (m_behaviourTreeData[i][j].size() > 1) {
+							int par = std::atoi(m_behaviourTreeData[i][j][1].c_str());
+							CheckHealth* behaviour = NEW(CheckHealth, (par));
+							state->m_Children.push_back(behaviour);
+						}
+						else {
+							CheckHealth* behaviour = NEW(CheckHealth, ());
+							state->m_Children.push_back(behaviour);
+						}
+					}
+					else if (val == "8") {
+						Flee* behaviour = NEW(Flee, ());
+						state->m_Children.push_back(behaviour);
+					}
+				}
+			}
+			bucle->m_Children.push_back(state);
+		}
+		m_behaviourTree->m_Behaviours.push_back(bucle);
+		m_behaviourTree->start(boss);
+	}
+}
+
+void cBossLogicComp::finishLogic()
+{
+	if (m_behaviourTree) {
+		m_behaviourTree->finishLogic();
+		DEL(m_behaviourTree);
+	}
 }
 
 void cBossLogicComp::Slot(float fTimeDiff) {
 	//Realiza toda la lógica de cambiar de posición y con el m_continue informa al nivel que se puede crear una nueva entidad
 	m_time -= static_cast<float>(fTimeDiff);
-	if (!m_poss.empty()) {
-		m_timePos -= static_cast<float>(fTimeDiff);
-		if (m_timePos <= 0.0f) {
-			const Boss* boss = dynamic_cast<const Boss*>(GetOwner());
-			if (m_index != -1) {
-				m_index = (m_index + 1) % m_poss.size();
-				vec2 pos = { m_poss[m_index].x, m_poss[m_index].y };
-				cNewPosMsg newpos(pos);
-				boss->ReceiveMessage(newpos);
-				m_timePos = m_poss[m_index].z;
-			}
-			else {
-				int i = rand() % m_poss.size();
-				vec2 pos = { m_poss[i].x, m_poss[i].y };
-				cNewPosMsg newpos(pos);
-				boss->ReceiveMessage(newpos);
-				this->m_timePos = m_poss[i].z;
+
+	if (!m_behaviourTreeData.empty() && m_behaviourTree) {
+		m_behaviourTree->update(fTimeDiff);
+	}
+	//Si no tiene behaviour tree realiza el comportamiento normal de posiciones
+	else {
+		if (!m_poss.empty()) {
+			m_timePos -= static_cast<float>(fTimeDiff);
+			if (m_timePos <= 0.0f) {
+				const Boss* boss = dynamic_cast<const Boss*>(GetOwner());
+				if (m_index != -1) {
+					m_index = (m_index + 1) % m_poss.size();
+					vec2 pos = { m_poss[m_index].x, m_poss[m_index].y };
+					cNewPosMsg newpos(pos);
+					boss->ReceiveMessage(newpos);
+					m_timePos = m_poss[m_index].z;
+				}
+				else {
+					int i = rand() % m_poss.size();
+					vec2 pos = { m_poss[i].x, m_poss[i].y };
+					cNewPosMsg newpos(pos);
+					boss->ReceiveMessage(newpos);
+					this->m_timePos = m_poss[i].z;
+				}
 			}
 		}
 	}

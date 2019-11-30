@@ -94,6 +94,7 @@ struct Lua_Upgrade {
 
 struct Lua_Boss {
 	vector<vec3> BSS_POSS;
+	vector<vector<vector<string>>> BSS_BEHAVIOUR;
 	int BSS_FRAMES;
 	float BSS_FRAMES_TIME;
 	bool BSS_RANDOM;
@@ -168,20 +169,20 @@ bool lua_checkLua(lua_State * L, int r) {
 void lua_Vec2(lua_State *L, int idx, vec2& vec) {
 	// universal helper function to get Vec3 function argument from Lua to C++ function
 	luaL_checktype(L, idx, LUA_TTABLE);
-	lua_rawgeti(L, idx, 1); vec.x = lua_tonumber(L, -1);
+	lua_rawgeti(L, idx, 1); vec.x = (float)lua_tonumber(L, -1);
 	lua_pop(L, 1);
-	lua_rawgeti(L, idx, 2); vec.y = lua_tonumber(L, -1);
+	lua_rawgeti(L, idx, 2); vec.y = (float)lua_tonumber(L, -1);
 	lua_pop(L, 1);
 }
 
 void lua_Vec3(lua_State *L, int idx, vec3& vec) {
 	// universal helper function to get Vec3 function argument from Lua to C++ function
 	luaL_checktype(L, idx, LUA_TTABLE);
-	lua_rawgeti(L, idx, 1); vec.x = lua_tonumber(L, -1);
+	lua_rawgeti(L, idx, 1); vec.x = (float)lua_tonumber(L, -1);
 	lua_pop(L, 1);
-	lua_rawgeti(L, idx, 2); vec.y = lua_tonumber(L, -1);
+	lua_rawgeti(L, idx, 2); vec.y = (float)lua_tonumber(L, -1);
 	lua_pop(L, 1);
-	lua_rawgeti(L, idx, 3); vec.z = lua_tonumber(L, -1);
+	lua_rawgeti(L, idx, 3); vec.z = (float)lua_tonumber(L, -1);
 	lua_pop(L, 1);
 }
 
@@ -198,7 +199,7 @@ int lua_getInteger(lua_State *L, string name) {
 	int res = 0;
 	lua_pushstring(L, name.c_str());
 	lua_gettable(L, -2);
-	res = lua_tonumber(L, -1);
+	res = (int)lua_tonumber(L, -1);
 	lua_pop(L, 1);
 	return res;
 }
@@ -207,7 +208,7 @@ float lua_getFloat(lua_State *L, string name) {
 	float res = 0.f;
 	lua_pushstring(L, name.c_str());
 	lua_gettable(L, -2);
-	res = lua_tonumber(L, -1);
+	res = (float)lua_tonumber(L, -1);
 	lua_pop(L, 1);
 	return res;
 }
@@ -424,9 +425,60 @@ vector<Lua_Upgrade> lua_getUpgradeArray(lua_State * L, string name) {
 	return res;
 }
 
+
+vector<string> lua_getBehaviourArray(lua_State *L) {
+	vector<string> res;
+	if (lua_istable(L, -1)) {
+		int size = lua_rawlen(L, -1);
+		for (int i = 1; i <= size; i++) {
+			lua_rawgeti(L, -1, i); 
+			res.push_back(lua_tostring(L, -1));
+			lua_pop(L, 1);
+		}
+	}
+	return res;
+}
+
+vector<vector<string>> lua_getBehaviourStateArray(lua_State *L) {
+	vector<vector<string>> res;
+	//lua_pushstring(L, name.c_str());
+	//lua_gettable(L, -2);
+	if (lua_istable(L, -1)) {
+		int size = lua_rawlen(L, -1);
+		for (int i = 1; i <= size; i++) {
+			vector<string> vect;
+			lua_rawgeti(L, -1, i);
+			vect = lua_getBehaviourArray(L);
+			res.push_back(vect);
+			lua_pop(L, 1);
+		}
+	}
+	//lua_pop(L, 1);
+	return res;
+}
+
+vector<vector<vector<string>>> lua_getBehaviourTreeArray(lua_State *L, string name) {
+	vector<vector<vector<string>>> res;
+	lua_pushstring(L, name.c_str());
+	lua_gettable(L, -2);
+	if (lua_istable(L, -1)) {
+		int size = lua_rawlen(L, -1);
+		for (int i = 1; i <= size; i++) {
+			vector<vector<string>> vect;
+			lua_rawgeti(L, -1, i);
+			vect = lua_getBehaviourStateArray(L);
+			res.push_back(vect);
+			lua_pop(L, 1);
+		}
+	}
+	lua_pop(L, 1);
+	return res;
+}
+
 Lua_Boss lua_getBasicBoss(lua_State * L) {
 	Lua_Boss res;
 	res.BSS_POSS = lua_getVector3Array(L, "BSS_POSS");
+	res.BSS_BEHAVIOUR = lua_getBehaviourTreeArray(L, "BSS_BEHAVIOUR");
 	res.BSS_FRAMES = lua_getInteger(L, "BSS_FRAMES");
 	res.BSS_FRAMES_TIME = lua_getFloat(L, "BSS_FRAMES_TIME");
 	res.BSS_RANDOM = lua_getBool(L, "BSS_RANDOM");
@@ -596,8 +648,8 @@ vector<Lua_CheckBox> lua_getCheckBoxArray(lua_State * L, string name) {
 
 Lua_World lua_getBasicWorld(lua_State * L) {
 	Lua_World res;
-	res.WRL_WIDTH = lua_getFloat(L, "WRL_WIDTH");
-	res.WRL_HEIGHT = lua_getFloat(L, "WRL_HEIGHT");
+	res.WRL_WIDTH = lua_getInteger(L, "WRL_WIDTH");
+	res.WRL_HEIGHT = lua_getInteger(L, "WRL_HEIGHT");
 	res.WRL_FULLSCREEN = lua_getInteger(L, "WRL_FULLSCREEN");
 	res.WRL_TEXTTIME = lua_getFloat(L, "WRL_TEXTTIME");
 	res.WRL_LEVELS = lua_getLevelArray(L, "WRL_LEVELS");
@@ -666,7 +718,7 @@ GameController* GameController::lua_getGame() {
 	cBulletComp* bulletComp = NEW(cBulletComp, (bullet));
 	player->AddComponent(bulletComp);
 
-	for (int i = 0; i < lua_world.WRL_LEVELS.size(); i++) {
+	for (unsigned int i = 0; i < lua_world.WRL_LEVELS.size(); i++) {
 		//Diálogos del nivel
 		vector<string> initTexts = lua_world.WRL_LEVELS[i].LVL_INIT_TEXT;
 		vector<string> bossTexts = lua_world.WRL_LEVELS[i].LVL_BOSS_TEXT;
@@ -674,22 +726,21 @@ GameController* GameController::lua_getGame() {
 
 		//Background del nivel
 		vector<cBackground*> backgrounds;
-		for (int j = 0; j < lua_world.WRL_LEVELS[i].LVL_BACKGROUND.size(); j++) {
+		for (unsigned int j = 0; j < lua_world.WRL_LEVELS[i].LVL_BACKGROUND.size(); j++) {
 			cBackground* back1 = NEW(cBackground, (lua_world.WRL_LEVELS[i].LVL_BACKGROUND[j].BCK_SPRITE, lua_world.WRL_LEVELS[i].LVL_BACKGROUND[j].BCK_SIZE, lua_world.WRL_LEVELS[i].LVL_BACKGROUND[j].BCK_RESIZE, lua_world.WRL_LEVELS[i].LVL_BACKGROUND[j].BCK_RESIZEPOS, lua_world.WRL_LEVELS[i].LVL_BACKGROUND[j].BCK_OFFSET));
 			back1->SetAudio(lua_world.WRL_LEVELS[i].LVL_BACKGROUND[j].BCK_MUSIC);
 			backgrounds.push_back(back1);
 		}
 
 		vector<Boss*> bosses2;
-		for (int j = 0; j < lua_world.WRL_LEVELS[i].LVL_BOSSES.size(); j++) {
+		for (unsigned int j = 0; j < lua_world.WRL_LEVELS[i].LVL_BOSSES.size(); j++) {
 			//Creación del boss del nivel 2 y sus esbirros
 			vector<vec3> posboss3 = lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_POSS;
+			vector<vector<vector<string>>> behaviourTree = lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_BEHAVIOUR;
 			Enemy* enemy3 = NEW(Enemy, ({ lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_ENEMY.ENE_SPRITE,lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_ENEMY.ENE_SIZE }));
 			Boss* boss3 = Boss::create();
 			cRenderComp* bossRend3 = NEW(cRenderComp, (lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_SPRITE, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_SIZE, false, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_FRAMES, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_FRAMES_TIME));
 			boss3->AddComponent(bossRend3);
-			cBossLogicComp* bossLogic3 = NEW(cBossLogicComp, (posboss3, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_ROUNDWAIT, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_INITWAIT, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_RANDOM, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_LIFES, { lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_ENEMY.ENE_MAXSPEED, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_ENEMY.ENE_MINSPEED, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_ENEMY.ENE_ROTATE, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_ENEMY.ENE_ERROR }));
-			boss3->AddComponent(bossLogic3);
 			cLinearVelComp* bossPos3 = NEW(cLinearVelComp, ({ posboss3.at(0).x, posboss3.at(0).y }, { 0.0f, 0.0f }));
 			boss3->AddComponent(bossPos3);
 			cCollisionComp* bossCollision3 = NEW(cCollisionComp, (lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_RADIUS));
@@ -699,11 +750,14 @@ GameController* GameController::lua_getGame() {
 			cEnemyComp* enemyComp3 = NEW(cEnemyComp, (enemy3));
 			boss3->AddComponent(enemyComp3);
 			bosses2.push_back(boss3);
+			cBossLogicComp* bossLogic3 = NEW(cBossLogicComp, (posboss3, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_ROUNDWAIT, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_INITWAIT, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_RANDOM, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_LIFES, { lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_ENEMY.ENE_MAXSPEED, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_ENEMY.ENE_MINSPEED, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_ENEMY.ENE_ROTATE, lua_world.WRL_LEVELS[i].LVL_BOSSES[j].BSS_ENEMY.ENE_ERROR }));
+			boss3->AddComponent(bossLogic3);
+			bossLogic3->SetBehaviourTree(behaviourTree);
 		}
 
 		//Mejoras del nivel 2
 		vector<Upgrade*> upgrades1;
-		for (int j = 0; j < lua_world.WRL_LEVELS[i].LVL_UPGRADES.size(); j++) {
+		for (unsigned int j = 0; j < lua_world.WRL_LEVELS[i].LVL_UPGRADES.size(); j++) {
 			Upgrade* upgrade1 = NEW(Upgrade, ({ lua_world.WRL_LEVELS[i].LVL_UPGRADES[j].UPG_SPRITE,lua_world.WRL_LEVELS[i].LVL_UPGRADES[j].UPG_SIZE }, (Upgrade::Type)lua_world.WRL_LEVELS[i].LVL_UPGRADES[j].UPG_TYPE, lua_world.WRL_LEVELS[i].LVL_UPGRADES[j].UPG_AMOUNT, lua_world.WRL_LEVELS[i].LVL_UPGRADES[j].UPG_DELAY));
 			upgrades1.push_back(upgrade1);
 		}
@@ -733,7 +787,7 @@ GameController* GameController::lua_getGame() {
 	cMenuComp* menuContr = NEW(cMenuComp, ());
 	pInput_manager->RegisterToEvent(world);
 
-	for (int i = 0; i < lua_world.WRL_BUTTONS.size(); i++) {
+	for (unsigned int i = 0; i < lua_world.WRL_BUTTONS.size(); i++) {
 		Button* button = NEW(Button, (lua_world.WRL_BUTTONS[i].BUTTON_SIZE));
 		button->SetCallback(onClickPlay);
 		cClickComp* buttonClick = NEW(cClickComp, ());
@@ -745,7 +799,7 @@ GameController* GameController::lua_getGame() {
 		menuContr->AddEntity(button);
 	}
 
-	for (int i = 0; i < lua_world.WRL_CHECKBOXES.size(); i++) {
+	for (unsigned int i = 0; i < lua_world.WRL_CHECKBOXES.size(); i++) {
 		bool checkedState = lua_world.WRL_CHECKBOXES[i].CHECKED_STATE;
 		CheckBox* checkB = NEW(CheckBox, (lua_world.WRL_CHECKBOXES[i].BUTTON_SIZE, lua_world.WRL_CHECKBOXES[i].CHECKED_SPRITE, lua_world.WRL_CHECKBOXES[i].UNCHECKED_SPRITE, checkedState));
 		checkB->SetCallback(onClickCheck);
@@ -782,7 +836,7 @@ GameController::GameController(World * world, cInputController *pInput_manager)
 }
 
 GameController::~GameController() {
-	DEL(Player::GetPlayer());
+	Player::DeletePlayer();
 	DEL(m_world);
 	DEL(m_input);
 	lua_close(luaState);
@@ -794,16 +848,6 @@ GameController::~GameController() {
 //Dibuja el mundo
 void GameController::Draw() {
 	m_world->Draw();
-}
-
-void toUpperCase(char *t)
-{
-	for (int i = 0; i < strlen(t); i++)
-	{
-		if (t[i] >= 'A' && t[i] <= 'Z') {
-			t[i] += 32;
-		}
-	}
 }
 
 string getLuaFilePath(string text) {

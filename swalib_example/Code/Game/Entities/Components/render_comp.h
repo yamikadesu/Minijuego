@@ -25,6 +25,7 @@ public:
 
 	inline cSprite* GetSprite() { return m_Sprite; };
 	inline void SetSprite(cSprite* sprite);
+	inline void SetSprite(std::string sFileName, const vec2 &vSize);
 	int GetFrames() const { return m_frames; }
 	void SetFrames(int val) { m_frames = val; }
 	float GetFrameTime() const { return m_frameTime; }

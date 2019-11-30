@@ -12,6 +12,7 @@
 //=============================================================================
 #ifdef _WIN32
 #pragma warning(disable:4996) // Using open/close/read... for file access
+//#pragma warning(disable:4100) // for formal parameter warning
 //#pragma comment(lib, "lua53.lib")
 //#pragma pack(1)
 
