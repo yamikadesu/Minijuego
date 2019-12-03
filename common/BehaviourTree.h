@@ -164,3 +164,41 @@ public:
 	Status update(float time, const Boss* boss);
 	void onExit(const Boss* boss) {};
 };
+
+//data[0] is the id so from data[1] to the end would be data for initialization
+inline void bindBehaviour(std::vector<Behaviour*>& children, std::string id, std::vector<std::string> data) {
+	if (id == "4") {
+		Idle* behaviour = NEW(Idle, ());
+		children.push_back(behaviour);
+	}
+	else if (id == "5") {
+		ChangeSprite* behaviour = NEW(ChangeSprite, ());
+		children.push_back(behaviour);
+	}
+	else if (id == "6") {
+		if (data.size() > 1) {
+			float par = (float)std::atof(data[1].c_str());
+			WaitBehaviour* behaviour = NEW(WaitBehaviour, (par));
+			children.push_back(behaviour);
+		}
+		else {
+			WaitBehaviour* behaviour = NEW(WaitBehaviour, ());
+			children.push_back(behaviour);
+		}
+	}
+	else if (id == "7") {
+		if (data.size() > 1) {
+			int par = std::atoi(data[1].c_str());
+			CheckHealth* behaviour = NEW(CheckHealth, (par));
+			children.push_back(behaviour);
+		}
+		else {
+			CheckHealth* behaviour = NEW(CheckHealth, ());
+			children.push_back(behaviour);
+		}
+	}
+	else if (id == "8") {
+		Flee* behaviour = NEW(Flee, ());
+		children.push_back(behaviour);
+	}
+}

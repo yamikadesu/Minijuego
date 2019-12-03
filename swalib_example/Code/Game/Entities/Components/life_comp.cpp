@@ -104,40 +104,7 @@ void cBossLogicComp::ReconstructBehaviour()
 			for (unsigned int j = 0; j < m_behaviourTreeData[i].size(); j++) {
 				if (m_behaviourTreeData[i][j].size() > 0) {
 					string val = m_behaviourTreeData[i][j][0];
-					if (val == "4") {
-						Idle* behaviour = NEW(Idle, ());
-						state->m_Children.push_back(behaviour);
-					}
-					else if (val == "5") {
-						ChangeSprite* behaviour = NEW(ChangeSprite, ());
-						state->m_Children.push_back(behaviour);
-					}
-					else if (val == "6") {
-						if (m_behaviourTreeData[i][j].size() > 1) {
-							float par = (float)std::atof(m_behaviourTreeData[i][j][1].c_str());
-							WaitBehaviour* behaviour = NEW(WaitBehaviour, (par));
-							state->m_Children.push_back(behaviour);
-						}
-						else {
-							WaitBehaviour* behaviour = NEW(WaitBehaviour, ());
-							state->m_Children.push_back(behaviour);
-						}
-					}
-					else if (val == "7") {
-						if (m_behaviourTreeData[i][j].size() > 1) {
-							int par = std::atoi(m_behaviourTreeData[i][j][1].c_str());
-							CheckHealth* behaviour = NEW(CheckHealth, (par));
-							state->m_Children.push_back(behaviour);
-						}
-						else {
-							CheckHealth* behaviour = NEW(CheckHealth, ());
-							state->m_Children.push_back(behaviour);
-						}
-					}
-					else if (val == "8") {
-						Flee* behaviour = NEW(Flee, ());
-						state->m_Children.push_back(behaviour);
-					}
+					bindBehaviour(state->m_Children, val, m_behaviourTreeData[i][j]);
 				}
 			}
 			bucle->m_Children.push_back(state);

@@ -157,15 +157,6 @@ struct Lua_World {
 	Lua_Background WRL_MENU;
 };
 
-bool lua_checkLua(lua_State * L, int r) {
-	if (r != LUA_OK) {
-		string errormsg = lua_tostring(L, -1);
-		cout << errormsg << endl;
-		return false;
-	}
-	return true;
-}
-
 void lua_Vec2(lua_State *L, int idx, vec2& vec) {
 	// universal helper function to get Vec3 function argument from Lua to C++ function
 	luaL_checktype(L, idx, LUA_TTABLE);
@@ -611,7 +602,7 @@ Lua_CheckBox lua_getBasicCheckBox(lua_State * L) {
 	res.UNCHECKED_SPRITE = lua_getString(L, "UNCHECKED_SPRITE");
 	res.CHECKED_STATE = lua_getBool(L, "CHECKED_STATE");
 	res.BUTTON_SIZE = lua_getVector2(L, "BUTTON_SIZE");
-	res.CHECKED_POS = lua_getVector2(L, "CHECKED_POS");
+	res.CHECKED_POS = lua_getVector2(L, "BUTTON_POS");
 	res.BUTTON_FRAMES = lua_getInteger(L, "BUTTON_FRAMES");
 	res.BUTTON_FRAMES_TIME = lua_getFloat(L, "BUTTON_FRAMES_TIME");
 	res.BUTTON_SPEED = lua_getVector2(L, "BUTTON_SPEED");
@@ -826,6 +817,15 @@ GameController* GameController::lua_getGame() {
 	return m_game = NEW(GameController, (world, pInput_manager));
 }
 
+bool lua_checkLua(lua_State * L, int r) {
+	if (r != LUA_OK) {
+		std::string errormsg = lua_tostring(L, -1);
+		std::cout << errormsg << std::endl;
+		return false;
+	}
+	return true;
+}
+
 
 GameController::GameController(World * world, cInputController *pInput_manager)
 	: m_timer(1.0f / 60.0f)
@@ -850,19 +850,6 @@ void GameController::Draw() {
 	m_world->Draw();
 }
 
-string getLuaFilePath(string text) {
-	char basePath[255] = "";
-	string thisFile = _fullpath(basePath, "", sizeof(basePath));
-	int pos = thisFile.find("\\");
-	while (pos != std::string::npos) {
-		thisFile.replace(pos, 1, "/");
-		pos = thisFile.find("\\");
-	}
-	thisFile.replace(thisFile.find("swalib_example/Release"), thisFile.size(), "");
-	thisFile.append(text);
-	return thisFile;
-}
-
 //Inicializa el juego con los valores indicados en sys
 GameController* GameController::Init() {
 	DEL(m_game);
@@ -873,7 +860,7 @@ GameController* GameController::Init() {
 	luaL_openlibs(luaState);
 
 	//if (lua_checkLua(luaState, luaL_dofile(luaState, "D:/Proyectos/ProyectoInterfazv3/ProyectoComportamientosv3/common/config.lua"))) {
-	if (lua_checkLua(luaState, luaL_dofile(luaState, getLuaFilePath("common/config.lua").c_str()))) {
+	if (lua_checkLua(luaState, luaL_dofile(luaState, SYS_VALUES::getLuaFilePath("common/config.lua").c_str()))) {
 		return lua_getGame();
 	}
 	return nullptr;
